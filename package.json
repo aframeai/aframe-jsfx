@@ -9,8 +9,8 @@
     "dist-js": "parcel build index.js --out-file aframe-jsfx.min.js",
     "dist-min-js": "parcel build index.js --no-minify --out-file aframe-jsfx.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "aframeai",
+  "license": "MIT",
   "dependencies": {
     "loov-jsfx": "^1.2.0"
   },
