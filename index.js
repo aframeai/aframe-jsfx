@@ -7,6 +7,9 @@ if (typeof AFRAME === "undefined") {
 }
 
 AFRAME.registerComponent("jsfx", {
+
+  multiple: true,
+
   schema: {
     src: { type: "asset" },
     sound: {},
@@ -32,10 +35,12 @@ AFRAME.registerComponent("jsfx", {
 
       // init jsfx
       this.jsfx = jsfx.Sounds(config);
+
     }
 
     // update current sound
     this.sound = this.data.sound || sounds[0];
+        
     // update event handler when playing
     if (this.playing) {
       this.removeEvent(old.event);
@@ -52,7 +57,8 @@ AFRAME.registerComponent("jsfx", {
     this.event = () => {
       this.playSound(this.sound);
     };
-    this.el.addEventListener(this.data.event, this.event);
+    let eventname = this.id || this.data.event;
+    this.el.addEventListener(eventname, this.event);
   },
 
   removeEvent: function (name) {

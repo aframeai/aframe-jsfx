@@ -1367,6 +1367,7 @@ if (typeof AFRAME === "undefined") {
 }
 
 AFRAME.registerComponent("jsfx", {
+  multiple: true,
   schema: {
     src: {
       type: "asset"
@@ -1415,7 +1416,8 @@ AFRAME.registerComponent("jsfx", {
       _this.playSound(_this.sound);
     };
 
-    this.el.addEventListener(this.data.event, this.event);
+    var eventname = this.id || this.data.event;
+    this.el.addEventListener(eventname, this.event);
   },
   removeEvent: function removeEvent(name) {
     if (!this.event) return;
