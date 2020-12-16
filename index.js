@@ -6,8 +6,6 @@ if (typeof AFRAME === "undefined") {
   );
 }
 
-console.log("JSFX", jsfx);
-
 AFRAME.registerComponent("jsfx", {
   schema: {
     src: { type: "asset" },
@@ -16,6 +14,7 @@ AFRAME.registerComponent("jsfx", {
   },
 
   update: function (old) {
+
     // update src
     if (!this.data.sound || old.src != this.data.src) {
       // get json from asset
@@ -32,10 +31,11 @@ AFRAME.registerComponent("jsfx", {
       }
 
       // init jsfx
-      this.sound = this.data.sound || sounds[0];
       this.jsfx = jsfx.Sounds(config);
     }
 
+    // update current sound
+    this.sound = this.data.sound || sounds[0];
     // update event handler when playing
     if (this.playing) {
       this.removeEvent(old.event);

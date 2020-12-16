@@ -1366,7 +1366,6 @@ if (typeof AFRAME === "undefined") {
   throw new Error("Component attempted to register before AFRAME was available.");
 }
 
-console.log("JSFX", _loovJsfx.default);
 AFRAME.registerComponent("jsfx", {
   schema: {
     src: {
@@ -1383,19 +1382,21 @@ AFRAME.registerComponent("jsfx", {
       // get json from asset
       var config = JSON.parse(THREE.Cache.files[this.data.src]); // create sound configuration from json entries
 
-      var sounds = Object.keys(config);
-      this.schema.sound.oneOf = sounds;
-      this.schema.sound.default = sounds[0]; // use first sound as default sound
+      var _sounds = Object.keys(config);
+
+      this.schema.sound.oneOf = _sounds;
+      this.schema.sound.default = _sounds[0]; // use first sound as default sound
 
       if (!this.data.sound) {
         this.el.setAttribute("jsfx", "sound", this.schema.sound.default);
       } // init jsfx
 
 
-      this.sound = this.data.sound || sounds[0];
       this.jsfx = _loovJsfx.default.Sounds(config);
-    } // update event handler when playing
+    } // update current sound
 
+
+    this.sound = this.data.sound || sounds[0]; // update event handler when playing
 
     if (this.playing) {
       this.removeEvent(old.event);
